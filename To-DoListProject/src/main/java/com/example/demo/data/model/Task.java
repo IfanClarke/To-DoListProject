@@ -6,38 +6,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
-import com.sun.istack.NotNull;
 
-@Entity 
+@Entity
 public class Task {
 
-
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotNull
 	private String task;
-	
+
 	@NotNull
 	private String description;
-	
+
 	@NotNull
 	private LocalDateTime deadline;
-	
+
 	@NotNull
 	private String priority;
-	
+
 	@NotNull
 	private Boolean done;
-	
-	
+
 	public Task() {
-		
+
 	}
-	
-public Task(String task, String description, LocalDateTime deadline, String priority, Boolean done) {
+
+	public Task(String task, String description, LocalDateTime deadline, String priority, Boolean done) {
 		this.task = task;
 		this.description = description;
 		this.deadline = deadline;
@@ -144,14 +142,11 @@ public Task(String task, String description, LocalDateTime deadline, String prio
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Task [id=" + id + ", task=" + task + ", description=" + description + ", deadline=" + deadline
 				+ ", priority=" + priority + ", done=" + done + "]";
 	}
-	
-	
-	
-	
+
 }

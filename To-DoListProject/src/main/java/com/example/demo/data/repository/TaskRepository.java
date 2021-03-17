@@ -11,20 +11,13 @@ import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
-	
 
-	public Task findById(int id);
-	
-	@Query(value = "SELECT * FROM task", nativeQuery = true)
+	@Query(value = "SELECT * FROM Task", nativeQuery = true)
 	public List<Task> getAllTasksSQL();
-	
-	
-	
+
 	@Query("SELECT t FROM Task t")
 	public List<Task> getAllTasksJPQL();
-	
-	
-	
-	@Query("SELECT t FROM Duck t WHERE t.id = ?1")
-	public Task getDuckByIdJPQL(int id);
+
+	@Query("SELECT t FROM Task t WHERE t.task = ?1")
+	public Task getTaskByNameJPQL(String task);
 }
