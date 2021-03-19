@@ -16,9 +16,9 @@ public interface SubtaskRepository extends JpaRepository<Subtask, Integer> {
 	@Query (value = "SELECT * FROM Subtask", nativeQuery = true)
 	public List<Subtask> getAllSubtasksSQL();
 
-	@Query ("SELECT t FROM Subtask t")
+	@Query ("SELECT s FROM Subtask s")
 	public List<Subtask> getAllSubtasksJPQL();
 
-	@Query ("SELECT s FROM Subtask s WHERE s.task = ?1")
-	public Subtask getSubtaskByNameJPQL(String task); 
+	@Query ("SELECT s FROM Subtask s WHERE s.subtaskid = ?1")
+	public Subtask getSubtaskByIdJPQL(Integer subtaskid); 
 }

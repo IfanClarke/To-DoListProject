@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import java.time.LocalDateTime;
 
 public class SubtaskDTO {
 
@@ -8,11 +7,11 @@ public class SubtaskDTO {
 
 	private int taskid;
 
-	private String task;
+	private String subtask;
 
 	private String description;
 
-	private LocalDateTime deadline;
+	private String deadline;
 
 	private String priority;
 
@@ -22,10 +21,10 @@ public class SubtaskDTO {
 
 	}
 
-	public SubtaskDTO(int taskid, String task, String description, LocalDateTime deadline, String priority,
+	public SubtaskDTO(int taskid, String subtask, String description, String deadline, String priority,
 			Boolean done) {
 		this.taskid = taskid;
-		this.task = task;
+		this.subtask = subtask;
 		this.description = description;
 		this.deadline = deadline;
 		this.priority = priority;
@@ -48,12 +47,12 @@ public class SubtaskDTO {
 		this.taskid = taskid;
 	}
 
-	public String getTask() {
-		return task;
+	public String getSubtask() {
+		return subtask;
 	}
 
-	public void setTask(String task) {
-		this.task = task;
+	public void setSubtask(String subtask) {
+		this.subtask = subtask;
 	}
 
 	public String getDescription() {
@@ -64,11 +63,11 @@ public class SubtaskDTO {
 		this.description = description;
 	}
 
-	public LocalDateTime getDeadline() {
+	public String getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(LocalDateTime deadline) {
+	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 
@@ -90,7 +89,7 @@ public class SubtaskDTO {
 
 	@Override
 	public String toString() {
-		return "SubtaskDTO [subtaskid=" + subtaskid + ", taskid=" + taskid + ", task=" + task + ", description="
+		return "SubtaskDTO [subtaskid=" + subtaskid + ", taskid=" + taskid + ", subtask=" + subtask + ", description="
 				+ description + ", deadline=" + deadline + ", priority=" + priority + ", done=" + done + "]";
 	}
 
@@ -103,7 +102,7 @@ public class SubtaskDTO {
 		result = prime * result + ((done == null) ? 0 : done.hashCode());
 		result = prime * result + ((priority == null) ? 0 : priority.hashCode());
 		result = prime * result + subtaskid;
-		result = prime * result + ((task == null) ? 0 : task.hashCode());
+		result = prime * result + ((subtask == null) ? 0 : subtask.hashCode());
 		result = prime * result + taskid;
 		return result;
 	}
@@ -139,10 +138,10 @@ public class SubtaskDTO {
 			return false;
 		if (subtaskid != other.subtaskid)
 			return false;
-		if (task == null) {
-			if (other.task != null)
+		if (subtask == null) {
+			if (other.subtask != null)
 				return false;
-		} else if (!task.equals(other.task))
+		} else if (!subtask.equals(other.subtask))
 			return false;
 		if (taskid != other.taskid)
 			return false;

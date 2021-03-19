@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +33,8 @@ public class TaskController {
 
 	@GetMapping
 	public ResponseEntity<List<TaskDTO>> getAllTasks() {
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("Location", "http://localhost:8080/task/all");
-
 		List<TaskDTO> data = taskService.readAllTasks();
-		return new ResponseEntity<List<TaskDTO>>(data, httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<List<TaskDTO>>(data, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
@@ -54,7 +52,7 @@ public class TaskController {
 		return new ResponseEntity<TaskDTO>(newTask, headers, HttpStatus.CREATED);
 	}
 	
-	@PatchMapping("/update/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<TaskDTO> updateTask(@PathVariable("id") int id, @RequestBody Task task)
 	{
 		TaskDTO updateTask = taskService.updateTask(id, task);
@@ -62,10 +60,10 @@ public class TaskController {
 		return new ResponseEntity<TaskDTO>(updateTask, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Boolean> deleteTask(@PathVariable("id") int id){
 		taskService.deleteTask(id);
-		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		return new ResponseEntity<Boolean>(true, HttpStatus.NO_CONTENT);
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,8 @@ public class TaskService {
 		this.taskRepository = taskRepository;
 		this.taskMapper = taskMapper;
 	}
-
+    
+	@Transactional
 	public List<TaskDTO> readAllTasks() {
 		List<Task> tasks = taskRepository.findAll();
 		List<TaskDTO> taskDTOs = new ArrayList<TaskDTO>();
@@ -43,12 +45,6 @@ public class TaskService {
 		} else {
 			throw new TaskNotFoundException("This task does not exist");
 		}
-	}
-
-	public TaskDTO readByName(String task) {
-		Task taskName = taskRepository.getTaskByNameJPQL(task);
-
-		return taskMapper.mapToDTO(taskName);
 	}
 
 	public TaskDTO createTask(Task task) {

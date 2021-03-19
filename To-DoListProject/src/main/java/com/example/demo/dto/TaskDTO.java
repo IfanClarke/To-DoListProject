@@ -1,6 +1,8 @@
 package com.example.demo.dto;
 
-import java.time.LocalDateTime;
+import java.util.List;
+
+import com.example.demo.data.model.Subtask;
 
 public class TaskDTO {
 
@@ -12,18 +14,21 @@ public class TaskDTO {
 
 		private String description;
 
-		private LocalDateTime deadline;
+		private String deadline;
 
 		private String priority;
 
 		private Boolean done;
 
+		private List <SubtaskDTO> subtaskLink;
+		
+		
 		
 	public TaskDTO() {
 
 		}
 
-	public TaskDTO(String task, String description, LocalDateTime deadline, String priority, Boolean done) {
+	public TaskDTO(String task, String description, String deadline, String priority, Boolean done) {
 	  
 			this.task = task;
 			this.description = description;
@@ -33,6 +38,18 @@ public class TaskDTO {
 		}
 
 		
+
+		public TaskDTO(int id, String task, String description, String deadline, String priority, Boolean done,
+			List<SubtaskDTO> subtaskLink) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.description = description;
+		this.deadline = deadline;
+		this.priority = priority;
+		this.done = done;
+		this.subtaskLink = subtaskLink;
+	}
 
 		public int getId() {
 			return id;
@@ -58,11 +75,11 @@ public class TaskDTO {
 			this.description = description;
 		}
 
-		public LocalDateTime getDeadline() {
+		public String getDeadline() {
 			return deadline;
 		}
 
-		public void setDeadline(LocalDateTime deadline) {
+		public void setDeadline(String deadline) {
 			this.deadline = deadline;
 		}
 
@@ -81,6 +98,16 @@ public class TaskDTO {
 		public void setDone(Boolean done) {
 			this.done = done;
 		}
+		
+		
+
+		public List<SubtaskDTO> getSubtaskLink() {
+			return subtaskLink;
+		}
+
+		public void setSubtaskLink(List<SubtaskDTO> subtaskLink) {
+			this.subtaskLink = subtaskLink;
+		}
 
 		@Override
 		public int hashCode() {
@@ -91,6 +118,7 @@ public class TaskDTO {
 			result = prime * result + ((done == null) ? 0 : done.hashCode());
 			result = prime * result + id;
 			result = prime * result + ((priority == null) ? 0 : priority.hashCode());
+			result = prime * result + ((subtaskLink == null) ? 0 : subtaskLink.hashCode());
 			result = prime * result + ((task == null) ? 0 : task.hashCode());
 			return result;
 		}
@@ -126,6 +154,11 @@ public class TaskDTO {
 					return false;
 			} else if (!priority.equals(other.priority))
 				return false;
+			if (subtaskLink == null) {
+				if (other.subtaskLink != null)
+					return false;
+			} else if (!subtaskLink.equals(other.subtaskLink))
+				return false;
 			if (task == null) {
 				if (other.task != null)
 					return false;
@@ -136,10 +169,11 @@ public class TaskDTO {
 
 		@Override
 		public String toString() {
-			return "Task [id=" + id + ", task=" + task + ", description=" + description + ", deadline=" + deadline
-					+ ", priority=" + priority + ", done=" + done + "]";
+			return "TaskDTO [id=" + id + ", task=" + task + ", description=" + description + ", deadline=" + deadline
+					+ ", priority=" + priority + ", done=" + done + ", subtaskLink=" + subtaskLink + "]";
 		}
 
+		
 	}
 
 

@@ -46,11 +46,6 @@ public class SubtaskService {
 		}
 	}
 
-	public SubtaskDTO readByName(String subtask) {
-		Subtask subtaskName = subtaskRepository.getSubtaskByNameJPQL(subtask);
-
-		return subtaskMapper.mapToDTO(subtaskName);
-	}
 
 	public SubtaskDTO createSubtask(Subtask subtask) {
 		Subtask newSubtask = subtaskRepository.save(subtask);
@@ -71,7 +66,7 @@ public class SubtaskService {
 		subtaskInDb.setSubtaskid(subtask.getTaskid());
 		subtaskInDb.setDescription(subtask.getDescription());
 		subtaskInDb.setDone(subtask.getDone());
-		subtaskInDb.setTask(subtask.getTask());
+		subtaskInDb.setSubtask(subtask.getSubtask());
 		subtaskInDb.setPriority(subtask.getPriority());
 		subtaskInDb.setDeadline(subtask.getDeadline());
 

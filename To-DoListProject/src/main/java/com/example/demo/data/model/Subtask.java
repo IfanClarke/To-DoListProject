@@ -3,9 +3,12 @@ package com.example.demo.data.model;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 
@@ -19,32 +22,50 @@ public class Subtask {
 	@NotNull
 	private int taskid;
 
-	@NotNull
-	private String task;
+
+	private String subtask;
 
 	@NotNull
 	private String description;
 
-	@NotNull
-	private LocalDateTime deadline;
+	
+	private String deadline;
 
 	@NotNull
 	private String priority;
 
 	@NotNull
 	private Boolean done;
+	
+	@ManyToOne (targetEntity = Task.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_task_id")
+	private Task taskLink;
 
 	public Subtask() {
 
 	}
 
-	public Subtask(int taskid, String task, String description, LocalDateTime deadline, String priority, Boolean done) {
+	public Subtask(int taskid, String subtask, String description, String deadline, String priority, Boolean done) {
 		this.taskid = taskid;
-		this.task = task;
+		this.subtask = subtask;
 		this.description = description;
 		this.deadline = deadline;
 		this.priority = priority;
 		this.done = done;
+	}
+	
+
+	public Subtask(int subtaskid, int taskid, String subtask,String description,
+			String deadline, String priority, Boolean done, Task taskLink) {
+		super();
+		this.subtaskid = subtaskid;
+		this.taskid = taskid;
+		this.subtask = subtask;
+		this.description = description;
+		this.deadline = deadline;
+		this.priority = priority;
+		this.done = done;
+		this.taskLink = taskLink;
 	}
 
 	public int getSubtaskid() {
@@ -63,12 +84,12 @@ public class Subtask {
 		this.taskid = taskid;
 	}
 
-	public String getTask() {
-		return task;
+	public String getSubtask() {
+		return subtask;
 	}
 
-	public void setTask(String task) {
-		this.task = task;
+	public void setSubtask(String subtask) {
+		this.subtask = subtask;
 	}
 
 	public String getDescription() {
@@ -79,11 +100,11 @@ public class Subtask {
 		this.description = description;
 	}
 
-	public LocalDateTime getDeadline() {
+	public String getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(LocalDateTime deadline) {
+	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 
@@ -102,10 +123,21 @@ public class Subtask {
 	public void setDone(Boolean done) {
 		this.done = done;
 	}
+	
+	
+	
+
+	public Task getTaskLink() {
+		return taskLink;
+	}
+
+	public void setTaskLink(Task taskLink) {
+		this.taskLink = taskLink;
+	}
 
 	@Override
 	public String toString() {
-		return "Subtask [subtaskid=" + subtaskid + ", taskid=" + taskid + ", task=" + task + ", description="
+		return "Subtask [subtaskid=" + subtaskid + ", taskid=" + taskid + ", subtask=" + subtask + ", description="
 				+ description + ", deadline=" + deadline + ", priority=" + priority + ", done=" + done + "]";
 	}
 
@@ -117,8 +149,9 @@ public class Subtask {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((done == null) ? 0 : done.hashCode());
 		result = prime * result + ((priority == null) ? 0 : priority.hashCode());
+		result = prime * result + ((subtask == null) ? 0 : subtask.hashCode());
 		result = prime * result + subtaskid;
-		result = prime * result + ((task == null) ? 0 : task.hashCode());
+		result = prime * result + ((taskLink == null) ? 0 : taskLink.hashCode());
 		result = prime * result + taskid;
 		return result;
 	}
@@ -152,16 +185,22 @@ public class Subtask {
 				return false;
 		} else if (!priority.equals(other.priority))
 			return false;
+		if (subtask == null) {
+			if (other.subtask != null)
+				return false;
+		} else if (!subtask.equals(other.subtask))
+			return false;
 		if (subtaskid != other.subtaskid)
 			return false;
-		if (task == null) {
-			if (other.task != null)
+		if (taskLink == null) {
+			if (other.taskLink != null)
 				return false;
-		} else if (!task.equals(other.task))
+		} else if (!taskLink.equals(other.taskLink))
 			return false;
 		if (taskid != other.taskid)
 			return false;
 		return true;
 	}
 
+	
 }

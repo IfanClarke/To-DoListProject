@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +37,9 @@ public class SubtaskController {
 	
 	@GetMapping
 	public ResponseEntity<List<SubtaskDTO>> getAllSubtasks() {
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("Location", "http://localhost:8080/subtask/all");
-
+		
 		List<SubtaskDTO> data = subtaskService.readAllSubtasks();
-		return new ResponseEntity<List<SubtaskDTO>>(data, httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<List<SubtaskDTO>>(data, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
@@ -58,7 +57,7 @@ public class SubtaskController {
 		return new ResponseEntity<SubtaskDTO>(newSubtask, headers, HttpStatus.CREATED);
 	}
 	
-	@PatchMapping("/update/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<SubtaskDTO> updateSubtask(@PathVariable("id") int subtaskid, @RequestBody Subtask subtask)
 	{
 		SubtaskDTO updateSubtask = subtaskService.updateSubtask(subtaskid, subtask);
@@ -66,10 +65,10 @@ public class SubtaskController {
 		return new ResponseEntity<SubtaskDTO>(updateSubtask, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Boolean> deleteSubtask(@PathVariable("id") int subtaskid){
 		subtaskService.deleteSubtask(subtaskid);
-		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		return new ResponseEntity<Boolean>(true, HttpStatus.NO_CONTENT);
 	}
 	
 }
