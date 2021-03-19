@@ -1,7 +1,5 @@
 package com.example.demo.data.model;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-
 
 @Entity
 public class Subtask {
@@ -22,13 +19,11 @@ public class Subtask {
 	@NotNull
 	private int taskid;
 
-
 	private String subtask;
 
 	@NotNull
 	private String description;
 
-	
 	private String deadline;
 
 	@NotNull
@@ -36,8 +31,8 @@ public class Subtask {
 
 	@NotNull
 	private Boolean done;
-	
-	@ManyToOne (targetEntity = Task.class, fetch = FetchType.EAGER)
+
+	@ManyToOne(targetEntity = Task.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_task_id")
 	private Task taskLink;
 
@@ -53,10 +48,9 @@ public class Subtask {
 		this.priority = priority;
 		this.done = done;
 	}
-	
 
-	public Subtask(int subtaskid, int taskid, String subtask,String description,
-			String deadline, String priority, Boolean done, Task taskLink) {
+	public Subtask(int subtaskid, int taskid, String subtask, String description, String deadline, String priority,
+			Boolean done, Task taskLink) {
 		super();
 		this.subtaskid = subtaskid;
 		this.taskid = taskid;
@@ -123,9 +117,6 @@ public class Subtask {
 	public void setDone(Boolean done) {
 		this.done = done;
 	}
-	
-	
-	
 
 	public Task getTaskLink() {
 		return taskLink;
@@ -202,5 +193,4 @@ public class Subtask {
 		return true;
 	}
 
-	
 }

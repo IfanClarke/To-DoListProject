@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.data.model.Subtask;
-import com.example.demo.data.model.Task;
 import com.example.demo.dto.SubtaskDTO;
-import com.example.demo.dto.TaskDTO;
 
 @SpringBootTest
 public class SubtaskMapperTest {
