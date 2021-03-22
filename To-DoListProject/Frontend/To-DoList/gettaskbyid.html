@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="index.css" rel="stylesheet">
+   
+</head>
+<body>
+    <nav class="navbar-nav">
+        <a href="index.html" class="navbar-brand">Home</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="createatask.html" class="nav-link">Create a task</a>
+            </li>
+            <li class="nav-item">
+                <a href="createasubtask.html" class="nav-link">Create a subtask</a>
+            </li>
+            <li class="nav-item">
+                <a href="tasks.html" class="nav-link">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a href="gettaskbyid.html" class="nav-link">Show task by id</a>
+            </li>
+             <li class="nav-item">
+                <a href="upgradetask.html" class="nav-link">upgrade task by id</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1 >Tasks</h1>
+    
+
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Task</th>
+            <th>Description</th>
+            <th>Deadline</th>
+            <th>Priority</th>
+            <th>Done</th>
+            </tr>
+        </thead>
+    <tbody id="tasks2"></tbody>
+    </table>
+<br>
+    <input type="number" id="taskId2" name="task_id_update">
+    <button id = "getTaskById">Get Task By Id</button>
+     
+    <script>
+ const showTaskById = document.querySelector("#getTaskById");
+       showTaskById.addEventListener("click", (event) =>{
+           event.preventDefault();
+         var taskId2 = document.getElementById('taskId2').value;
+       fetch("http://localhost:8080/task/" + taskId2).then(
+          res=>{
+            res.json().then(
+                data=>{
+                    console.log(data);
+
+                    let temp="";
+                  temp += "<tr>";
+                  temp += "<td>" + data.id + "</td>";
+                  temp += "<td>" + data.task + "</td>";
+                  temp += "<td>" + data.description + "</td>";
+                  temp += "<td>" + data.deadline + "</td>";
+                  temp += "<td>" + data.priority + "</td></tr>";
+              
+            
+
+              document.getElementById("tasks2").innerHTML = temp;
+                })
+
+
+             }   
+          
+          );
+       
+        });
+         </script>
+</body>
