@@ -1,1 +1,17 @@
+com\example\demo\service\SubtaskServiceIntegrationTest.class
+com\example\demo\mapper\TaskMapperTest.class
+com\example\demo\repository\TaskRepositoryTest.class
+com\example\demo\service\TaskServiceIntegrationTest.class
+com\example\demo\controller\SubtaskControllerUnitTest.class
 com\example\demo\ToDoListProjectApplicationTests.class
+com\example\demo\dto\TaskDTOTest.class
+com\example\demo\mapper\SubtaskMapperTest.class
+com\example\demo\service\TaskServiceUnitTest.class
+com\example\demo\data\model\SubtaskTest.class
+com\example\demo\dto\SubtaskDTOTest.class
+com\example\demo\data\model\TaskTest.class
+com\example\demo\repository\SubtaskRepositoryTest.class
+com\example\demo\controller\TaskControllerIntegrationTest.class
+com\example\demo\service\SubtaskServiceUnitTest.class
+com\example\exceptions\TaskNotFoundExceptionTest.class
+com\example\demo\controller\TaskControllerUnitTest.class
