@@ -1,0 +1,15 @@
+com\example\demo\dto\SubtaskDTO.class
+com\example\demo\mapper\SubtaskMapper.class
+com\example\demo\controller\TaskController.class
+com\example\demo\service\TaskService.class
+com\example\demo\configuration\ApplicationConfiguration.class
+com\example\demo\data\model\Subtask.class
+com\example\demo\exceptions\TaskNotFoundException.class
+com\example\demo\service\SubtaskService.class
+com\example\demo\dto\TaskDTO.class
+com\example\demo\mapper\TaskMapper.class
+com\example\demo\controller\SubtaskController.class
+com\example\demo\data\repository\SubtaskRepository.class
+com\example\demo\ToDoListProjectApplication.class
+com\example\demo\data\repository\TaskRepository.class
+com\example\demo\data\model\Task.class

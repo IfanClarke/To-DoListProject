@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="index.css" rel="stylesheet">
+   
+</head>
+<body>
+    <nav class="navbar-nav">
+        <a href="index.html" class="navbar-brand">Home</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="createatask.html" class="nav-link">Create a task</a>
+            </li>
+            <li class="nav-item">
+                <a href="createasubtask.html" class="nav-link">Create a subtask</a>
+            </li>
+            <li class="nav-item">
+                <a href="tasks.html" class="nav-link">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a href="gettaskbyid.html" class="nav-link">Show task by id</a>
+            </li>
+             <li class="nav-item">
+                <a href="upgradetask.html" class="nav-link">upgrade task by id</a>
+            </li>
+        </ul>
+    </nav>
+   
+
+    <h1 >Tasks</h1>
+    
+
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Task</th>
+            <th>Description</th>
+            <th>Deadline</th>
+            <th>Priority</th>
+            <th>subtaskLink</th>
+            </tr>
+        </thead>
+    <tbody id="tasks"></tbody>
+    </table>
+
+    <input type="number" id="taskId" name="task_id">
+    <button id = "deleteTask">Delete</button> <br>
+    
+     
+    <script>
+        //show all tasks
+        fetch("http://localhost:8080/task").then(
+          res=>{
+            res.json().then(
+                data=>{
+                    console.log(data);
+          if (data.length > 0){
+              var temp="";
+     
+              data.forEach((u) => {
+                  temp += "<tr>";
+                  temp += "<td>" + u.id + "</td>"
+                  temp += "<td>" + u.task + "</td>"
+                  temp += "<td>" + u.description + "</td>"
+                  temp += "<td>" + u.deadline + "</td>"
+                  temp += "<td>" + u.priority + "</td>"
+                  temp += "<td>" + JSON.stringify(u.subtaskLink) + "</td>"
+
+                
+                
+                
+                }
+              )
+     
+              document.getElementById("tasks").innerHTML = temp;
+          }
+         })
+          });
+      
+          //delete task
+
+              var delete_task = async (taskId) => {
+                var taskId = document.getElementById('taskId').value;
+         const response = await fetch(`http://localhost:8080/task/${taskId}`, {
+             method: "DELETE"
+         });
+        
+      
+             
+         if (response.status != 204) {
+             alert('That task does not seem to exist for it to be deleted');
+             console.error(`Error: Status code ${response.status}`);
+             return response.status; 
+         }
+         alert('Task deleted');
+         console.log('Task with ID:' + taskId + ' was deleted')
+       }
+     
+       const deleteTask = document.querySelector("#deleteTask");
+       deleteTask.addEventListener("click", (event) => {
+           event.preventDefault();
+           delete_task();
+       }); 
+    
+      
+
+         </script>
+</body>
